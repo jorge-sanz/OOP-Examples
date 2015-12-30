@@ -157,9 +157,10 @@ public class Date {
 	 * This method is based on the real Gregorian Calendar rules.
 	 */
 	private boolean isAValidDate(int day, int month, int year) {
-		boolean isAValidDate = false;
+		boolean isAValidDate = true;
 		
-		if (integerArrayContainsANumber(LONGEST_MONTHS, month)) {
+		/**
+		 * if (integerArrayContainsANumber(LONGEST_MONTHS, month)) {
 			if (1 <= day && day <= 31) {
 				isAValidDate = true;
 			}
@@ -180,6 +181,7 @@ public class Date {
 				}
 			}
 		}
+		 */
 		
 		return isAValidDate;
 	}
