@@ -82,12 +82,16 @@ public class Freelancer extends Employee {
 	 * 
 	 * @return salary	the freelancer's salary
 	 */
-	
+	public BigDecimal getSalary() {
+		return salary;
+	}
 	
 	/**
 	 * Sets the freelancer's salary.
 	 * 
 	 * @param salary	the freelancer's salary to set
 	 */
-	
+	public void setSalary(BigDecimal salary) {
+		this.salary = salary;
+	}
 }
