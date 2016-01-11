@@ -5,7 +5,6 @@ package exercise6;
  * basic functions like: reset, start, stop.
  * 
  * @author Jorge Sanz
- *
  */
 public class Chronometer {
 	
