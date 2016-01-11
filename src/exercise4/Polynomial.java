@@ -1,19 +1,18 @@
 package exercise4;
 
 /**
- * Polynomial is a class which implements a polynomial of degree 2 (ax^2 + bx + c)
- * with operations like addition and subtraction. Also it's able to calculate real roots
- * if they exist.
+ * Polynomial is a class which implements a polynomial of degree 2 
+ * (ax^2 + bx + c) with operations like addition and subtraction. Also it's 
+ * able to calculate real roots if they exist.
  *
  * @author Jorge Sanz
  */
 
 public class Polynomial {
-
 	private double a, b, c;
 
     /**
-     * Initializes a polynomial by specified values of a, b and c
+     * Initializes a polynomial by specified values of a, b and c.
      *
      * @param a first coefficient
      * @param b second coefficient
@@ -26,7 +25,7 @@ public class Polynomial {
     }
 
     /**
-     * Initializes a polynomial with zero values
+     * Initializes a polynomial with zero values.
      */
     public Polynomial() {
         this.a = 0.0;
@@ -35,34 +34,34 @@ public class Polynomial {
     }
 
     /**
-     * Get a value
+     * Gets a value.
      *
-     * @return a
+     * @return a	first coefficient of the polynomial
      */
     public double getA() {
         return a;
     }
 
     /**
-     * Set a value
+     * Sets a value.
      *
-     * @param a first coefficient of the polynomial
+     * @param a	first coefficient of the polynomial
      */
     public void setA(double a) {
         this.a = a;
     }
 
     /**
-     * Get b value
+     * Gets b value.
      *
-     * @return b
+     * @return b	second coefficient of the polynomial
      */
     public double getB() {
         return b;
     }
 
     /**
-     * Set a value
+     * Sets a value.
      *
      * @param b second coefficient of the polynomial
      */
@@ -71,16 +70,16 @@ public class Polynomial {
     }
 
     /**
-     * Get c value
+     * Gets c value.
      *
-     * @return c
+     * @return c	third coefficient of the polynomial
      */
     public double getC() {
         return c;
     }
 
     /**
-     * Set c value
+     * Set c value.
      *
      * @param c third coefficient of the polynomial
      */
@@ -89,7 +88,7 @@ public class Polynomial {
     }
 
     /**
-     * Returns a Polynomial whose value is (this + addedPolynomial)
+     * Returns a Polynomial whose value is (this + addedPolynomial).
      *
      * @param addedPolynomial polynomial to be added
      * @return (this + addedPolynomial)
@@ -97,9 +96,9 @@ public class Polynomial {
     public Polynomial add(Polynomial addedPolynomial) {
         double a, b, c;
 
-        a = this.getA() + addedPolynomial.getA();
-        b = this.getB() + addedPolynomial.getB();
-        c = this.getC() + addedPolynomial.getC();
+        a = getA() + addedPolynomial.getA();
+        b = getB() + addedPolynomial.getB();
+        c = getC() + addedPolynomial.getC();
 
         return new Polynomial(a, b, c);
     }
@@ -112,9 +111,9 @@ public class Polynomial {
     public Polynomial negate(){
         double a, b, c;
 
-        a = - this.getA();
-        b = - this.getB();
-        c = - this.getC();
+        a = - getA();
+        b = - getB();
+        c = - getC();
 
         return new Polynomial(a, b, c);
     }
@@ -128,37 +127,35 @@ public class Polynomial {
     public Polynomial subtract(Polynomial subtractedPolynomial) {
         double a, b, c;
 
-        a = this.getA() - subtractedPolynomial.getA();
-        b = this.getB() - subtractedPolynomial.getB();
-        c = this.getC() - subtractedPolynomial.getC();
+        a = getA() - subtractedPolynomial.getA();
+        b = getB() - subtractedPolynomial.getB();
+        c = getC() - subtractedPolynomial.getC();
 
         return new Polynomial(a, b, c);
     }
 
     /**
-     * Returns two different root values if they both exist. If the polynomial has
-     * only one root, it returns two equal values. If the polynomial has not roots, it returns
-     * two zero values.
+     * Returns a string representation of the polynomial roots.
      *
-     * @return firstRoot
-     * @return secondRoot
+     * @return string representation of the roots
      */
     public String getRoots(){
         double firstRoot;
         double secondRoot;
 
         if (Math.pow(getB(), 2) - 4 * getA() * getC() >= 0) {
-            firstRoot = (- getB() + Math.sqrt(Math.pow(getB(), 2) - 4 * getA() * getC()))
-                    / (2 * getA());
-            secondRoot = (- getB() - Math.sqrt(Math.pow(getB(), 2) - 4 * getA() * getC()))
-                    / (2 * getA());
+            firstRoot = (- getB() + Math.sqrt(Math.pow(getB(), 2) 
+            		- 4 * getA() * getC())) / (2 * getA());
+            secondRoot = (- getB() - Math.sqrt(Math.pow(getB(), 2) 
+            		- 4 * getA() * getC())) / (2 * getA());
             if (Math.pow(getB(), 2) - 4 * getA() * getC() == 0) {
-                return "La raíz real única del polinomio es " + firstRoot;
+                return "The only real root of the polynomial is " + firstRoot;
             } else {
-                return "Las raíces reales del polinomio son " + firstRoot + " y " + secondRoot;
+                return "The first root is " + firstRoot + " and the second one "
+                		+ "is " + secondRoot;
             }
         } else {
-            return "Este polinomio no tiene raíces reales";
+            return "This polynomial hasn't real roots.";
         }
     }
     
