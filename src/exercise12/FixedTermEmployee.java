@@ -37,6 +37,9 @@ public class FixedTermEmployee extends Employee {
 	 * 
 	 * @return entranceYear	the entrance year to the company
 	 */
+	public int getEntranceYear() {
+		return entranceYear;
+	}
 	
 	/**
 	 * Returns his extra salary.
