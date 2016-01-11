@@ -1,21 +1,23 @@
 package exercise2;
 
 /**
- * ComplexNumber is a class which represents a complex number and implements basic
- * operations.
+ * ComplexNumber is a class which represents a complex number and implements
+ * basic operations.
  *
  * @author Jorge Sanz
  */
 
 public class ComplexNumber {
-	
 	private double real, imaginary;
 
     /**
-     * Initializes a complex number by the specified values of real and imaginary
+     * Initializes a complex number by the specified values of real and
+     * imaginary.
      *
-     * @param real number which represents the real part of the complex number
-     * @param imaginary number which represents the imaginary part of the complex number
+     * @param real		number which represents the real part of the complex 
+     * 					number
+     * @param imaginary	number which represents the imaginary part of the 
+     * 					complex number
      */
     public ComplexNumber(double real, double imaginary) {
         this.real = real;
@@ -25,7 +27,7 @@ public class ComplexNumber {
     /**
      * Initializes a complex number by other specified complex number
      *
-     * @param complexNumber existing complex number
+     * @param complexNumber	existing complex number
      */
     public ComplexNumber(ComplexNumber complexNumber) {
         this.real = complexNumber.getReal();
@@ -40,35 +42,44 @@ public class ComplexNumber {
     }
 
     /**
-     * Gets the value of real
+     * Returns the real part value of the number.
+     * 
+     * @return real	the real part value of the number
      */
     public double getReal() {
         return real;
     }
 
     /**
-     * Sets the value of real
+     * Sets the real part value of the number.
+     * 
+     * @param real	the real part value of the number to set
      */
     public void setReal(double real) {
         this.real = real;
     }
 
     /**
-     * Gets the value of imaginary
+     * Returns the imaginary part value of the number.
+     * 
+     * @return imaginary	the imaginary part value of the number
      */
     public double getImaginary() {
         return imaginary;
     }
 
     /**
-     * Sets the value of imaginary
+     * Sets the imaginary part value of the number
+     * 
+     * @param imaginary	the imaginary part value of the number
      */
     public void setImaginary(double imaginary) {
         this.imaginary = imaginary;
     }
 
     /**
-     * Prints a representation of the complex number in natural language
+     * Returns a string representation of the complex number in natural 
+     * language.
      */
     @Override
     public String toString() {
@@ -91,7 +102,7 @@ public class ComplexNumber {
     }
 
     /**
-     * Returns a ComplexNumber whose value is (-this)
+     * Returns a ComplexNumber whose value is (- this)
      *
      * @return negatedComplexNumber
      */
@@ -139,15 +150,17 @@ public class ComplexNumber {
     public ComplexNumber reciprocal(){
         double scale;
 
-        scale = this.getReal() * this.getReal() + this.getImaginary() * this.getImaginary();
+        scale = this.getReal() * this.getReal() 
+        		+ this.getImaginary() * this.getImaginary();
 
-        return new ComplexNumber(this.getReal() / scale, - this.getImaginary() / scale);
+        return new ComplexNumber(this.getReal() / scale,
+        		- this.getImaginary() / scale);
     }
 
     /**
      * Returns a ComplexNumber whose value is the conjugate of this
      *
-     * @return conjugateComplexNumber conjugate complex number
+     * @return conjugateComplexNumber	conjugate complex number
      */
     public ComplexNumber conjugate() {
         double real, imaginary;
