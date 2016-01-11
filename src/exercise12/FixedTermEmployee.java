@@ -1,6 +1,7 @@
 package exercise12;
 
 import java.math.BigDecimal;
+import java.time.Year;
 
 /**
  * FixedTermEmployee is a class that inherits from Employee and represents
@@ -46,34 +47,56 @@ public class FixedTermEmployee extends Employee {
 	 * 
 	 * @return extraSalary	fixed-term employee's extra salary
 	 */
+	public BigDecimal getExtraSalary() {
+		return extraSalary;
+	}
 	
 	/**
 	 * Sets his extra salary.
 	 * 
 	 * @param extraSalary	fixed-term employee's extra salary to be set
 	 */
+	public void setExtraSalary(BigDecimal extraSalary) {
+		this.extraSalary = extraSalary;
+	}
 	
 	/**
 	 * Returns his salary.
 	 * 
 	 * @return salary	fixed-term employee's salary
 	 */
+	public BigDecimal getSalary() {
+		return salary;
+	}
 	
 	/**
 	 * Sets his salary.
 	 * 
 	 * @param salary	fixed-term employee's salary to set
 	 */
+	public void setSalary(BigDecimal salary) {
+		this.salary = salary;
+	}
 	
 	/**
 	 * Returns number of years working at the company.
 	 * 
 	 * @return yearsAtCompany	number of years working at the company
 	 */
+	public int getYearsAtCompany() {
+		return Year.now().getValue() - getEntranceYear();
+	}
 	
 	/**
-	 * Returns his annual extra salary.
+	 * Returns his annual salary.
 	 * 
-	 * @return annualExtraSalary	annual extra salary
+	 * @return annualSalary	annual salary
 	 */
+	public BigDecimal getAnnualSalary() {
+		return getSalary()
+				.multiply(new BigDecimal(12.00))
+				.add(getExtraSalary()
+						.multiply(new BigDecimal(
+								(double) getYearsAtCompany())));
+	}
 }
