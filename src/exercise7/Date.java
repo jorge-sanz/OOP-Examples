@@ -1,9 +1,5 @@
 package exercise7;
 
-import java.util.ArrayList;
-import static java.util.Arrays.asList;
-import java.util.List;
-
 /**
  * Date is a class which represents a date from the Gregorian Calendar.
  * <br>
@@ -25,17 +21,24 @@ public class Date {
 	 * Initializes a date with the specified values of day, month, year and 
 	 * a boolean to get if the date is extended or shortened.
 	 * 
-	 * @param day			day of the date
-	 * @param month			month of the date
-	 * @param year			year of the date
-	 * @param isExtended	value which represents the if the format of the
-	 * 						date is extended or shortened
+	 * @param day						day of the date
+	 * @param month						month of the date
+	 * @param year						year of the date
+	 * @param isExtended				value which represents the if the format
+	 * 									of the date is extended or shortened.
+	 * 
+	 * @throws DateOutOfRangeException	if date is out of range
 	 */
-	public Date(int day, int month, int year, boolean isExtended) {
-		this.day = day;
-		this.month = month;
-		this.year = year;
-		this.isExtended = isExtended;
+	public Date(int day, int month, int year, boolean isExtended)
+			throws DateOutOfRangeException {
+		if (isAValidDate(day, month, year)) {
+			this.day = day;
+			this.month = month;
+			this.year = year;
+			this.isExtended = isExtended;
+		} else {
+			throw new DateOutOfRangeException("Date out of range");
+		}
 	}
 	
 	/**
@@ -50,11 +53,15 @@ public class Date {
 	/**
 	 * Sets the day of the date.
 	 * 
-	 * @param day	new day of the date.
+	 * @param day							day of the date to set
+	 * 
+	 * @throws DateOutOfRangeException 		if date is out of range
 	 */
-	public void setDay(int day) {
+	public void setDay(int day) throws DateOutOfRangeException {
 		if (isAValidDate(day, getMonth(), getYear())) {
 			this.day = day;
+		} else {
+			throw new DateOutOfRangeException("Date out of range");
 		}
 	}
 	
@@ -70,11 +77,15 @@ public class Date {
 	/**
 	 * Sets the month of the date
 	 * 
-	 * @param month	new month of the date
+	 * @param month						month of the date to set
+	 * 
+	 * @throws DateOutOfRangeException	if date is out of range 
 	 */
-	public void setMonth(int month) {
+	public void setMonth(int month) throws DateOutOfRangeException {
 		if (isAValidDate(getDay(), month, getYear())) {
 			this.month = month;
+		} else {
+			throw new DateOutOfRangeException("Date out of range");
 		}
 	}
 	
@@ -90,11 +101,15 @@ public class Date {
 	/**
 	 * Sets the year of the date.
 	 * 
-	 * @param year	year of the date
+	 * @param year						year of the date to set
+	 * 
+	 * @throws DateOutOfRangeException 	if date is out of range
 	 */
-	public void setYear(int year) {
+	public void setYear(int year) throws DateOutOfRangeException {
 		if (isAValidDate(getDay(), getMonth(), year)) {
 			this.year = year;
+		} else {
+			throw new DateOutOfRangeException("Date out of range");
 		}
 	}
 	
@@ -131,15 +146,23 @@ public class Date {
 	/**
 	 * Updates the date by one day.
 	 */
-	public void increase() {
-		setDay(getDay() + 1);
-		if (!isAValidDate(getDay(), getMonth(), getYear())) {
-			 
+	public void increase() throws DateOutOfRangeException {
+		if (isDayOutOfRange(getDay() + 1, getMonth(), getYear()))  {
+			if (isMonthOutOfRange(getMonth() + 1)) {
+				setDay(1);
+				setMonth(1);
+				setYear(getYear() + 1);
+			} else {
+				setDay(1);
+				setMonth(getMonth() + 1);
+			}
+		} else {
+			setDay(getDay() + 1); 
 		}
 	}
 	
 	/**
-	 * Prints the date with the current format.
+	 * Prints the date in the current format: short or extended.
 	 */
 	public void print() {
 		if (isExtended()) {
@@ -151,37 +174,63 @@ public class Date {
 	}
 	
 	/*
-	 * Check if a date is a valid date. Returns true or throws an specific
-	 * exception depending on what is wrong.
+	 * Returns true if it is a valid date and false if not.
 	 * <br>
 	 * This method is based on the real Gregorian Calendar rules.
 	 */
 	private boolean isAValidDate(int day, int month, int year) {
 		boolean isAValidDate = false;
 		
-		if (integerArrayContainsANumber(LONGEST_MONTHS, month)) {
-			if (1 <= day && day <= 31) {
-				isAValidDate = true;
-			}
+		if (!isDayOutOfRange(day, month, year) 
+				&& !isMonthOutOfRange(month)) {
+			return true;
+		}
+		
+		return isAValidDate;
+	}
+	
+	/*
+	 * Returns true if a date is day-out-of-range and false if not.
+	 */
+	public boolean isDayOutOfRange(int day, int month, int year) {
+		if (day <= 0) {
+			return true;
 		} else {
-			if (month == 2) {
-				if (isALeapYear(year)) {
-					if (1 <= day && day <= 29) {
-						isAValidDate = true;
-					}
-				} else {
-					if (1 <= day && day <= 28) {
-						isAValidDate = true;
-					}
+			if (integerArrayContainsANumber(LONGEST_MONTHS, month)) {
+				if (day > 31) {
+					return true;
 				}
 			} else {
-				if (1 <= day && day <= 30) {
-					isAValidDate = true;
+				if (month == 2) {
+					if (isALeapYear(year)) {
+						if (day > 29) {
+							return true;
+						}
+					} else {
+						if (day > 28) {
+							return true;
+						}
+					}
+				} else {
+					if (day > 30) {
+						return true;
+					}
 				}
 			}
 		}
 		
-		return isAValidDate;
+		return false;
+	}
+	
+	/*
+	 * Returns true if a date is month-out-of-range and false if not.
+	 */
+	public boolean isMonthOutOfRange(int month) {
+		if (month < 1 && month > 12) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	/*
