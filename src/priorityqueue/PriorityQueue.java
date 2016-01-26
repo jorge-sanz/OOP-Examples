@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * PriorityQueue is a class which represents a queue with elements with
  * priority, which means that the first element you can extract is the one which
- * has the higher priority. 
+ * has the higher priority (order of priority: 1, 2, 3...). 
  *
  * @author Jorge Sanz Perez
  */
@@ -13,7 +13,7 @@ public class PriorityQueue<E> {
 	private ArrayList<Element<E>> queue;
 	
 	/**
-	 * Initializes the priority queue.
+	 * Initializes a priority queue.
 	 */
 	public PriorityQueue() {
 		queue = new ArrayList<Element<E>>();
@@ -37,7 +37,11 @@ public class PriorityQueue<E> {
 					getQueue().add(i, elementToAdd);
 					break;
 				}
-			}
+				
+				if (i == getQueue().size() - 1) {
+					getQueue().add(elementToAdd);
+				}
+			} 
 		}
 	}
 	
@@ -47,7 +51,7 @@ public class PriorityQueue<E> {
 	 * @return headElement	head element of the queue
 	 */
 	public Element<E> peek() {
-		return getQueue().get(getQueue().size() - 1);
+		return getQueue().get(0);
 	}
 	
 	/**
@@ -56,8 +60,8 @@ public class PriorityQueue<E> {
 	 * @return headElement	head element of the queue.
 	 */
 	public Element<E> poll() {
-		Element<E> headElement = getQueue().get(getQueue().size() - 1);
-		getQueue().remove(getQueue().size() - 1);
+		Element<E> headElement = getQueue().get(0);
+		getQueue().remove(0);
 		return headElement;
 	}
 	
